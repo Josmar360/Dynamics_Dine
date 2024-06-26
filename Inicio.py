@@ -1,5 +1,6 @@
 import pygame
 import mysql.connector
+from Screen.Mostrar_Pedidos import Mostrar_Pedidos
 
 # Inicialización de Pygame
 pygame.init()
@@ -12,13 +13,20 @@ ANCHO, ALTO = info_pantalla.current_w, info_pantalla.current_h
 BLANCO = (255, 255, 255)
 NEGRO = (0, 0, 0)
 GRIS = (200, 200, 200)
+AZUL_CLARO = (205, 242, 214)
+VERDE_GRIS = (151, 196, 173)
+AMARILLO_VERDOSO = (230, 252, 217)
+
+# Imágenes
+logotipo = pygame.image.load("Image/Logotipo.png")
 
 # Configuración de la ventana
 pantalla = pygame.display.set_mode((ANCHO, ALTO))
 pygame.display.set_caption("Iniciar sesión")
 
-# Fuente para el texto
-fuente_titulo = pygame.font.Font("Font/Pollinator.ttf", 50)
+# Fuentes para el texto
+fuente_titulo = pygame.font.Font("Font/Lost_Signal_Regular.otf", 45)
+fuente_input = pygame.font.Font("Font/Delmon_Delicate.ttf", 30)
 
 # Datos de conexión a la base de datos
 configuracion = {
@@ -29,12 +37,23 @@ configuracion = {
     'raise_on_warnings': True
 }
 
+MAX_CARACTERES_USUARIO = 18  # Límite de caracteres para el usuario
+MAX_CARACTERES_PASSWORD = 20  # Límite de caracteres para la contraseña
+
 
 def dibujar_texto(texto, fuente, color, surface, x, y):
     texto_objeto = fuente.render(texto, True, color)
     texto_rectangulo = texto_objeto.get_rect()
     texto_rectangulo.center = (x, y)
     surface.blit(texto_objeto, texto_rectangulo)
+
+
+def mostrar_mensaje_error(mensaje):
+    pantalla.fill(AZUL_CLARO)
+    dibujar_texto(mensaje, fuente_titulo, NEGRO,
+                  pantalla, ANCHO // 2, ALTO // 2)
+    pygame.display.flip()
+    pygame.time.wait(1500)  # Espera 1.5 segundos antes de continuar
 
 
 def Inicio():
@@ -44,7 +63,7 @@ def Inicio():
     is_typing_user = True
 
     while ejecutando:
-        pantalla.fill(BLANCO)
+        pantalla.fill(AZUL_CLARO)
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
@@ -58,7 +77,8 @@ def Inicio():
                     elif evento.key == pygame.K_ESCAPE:
                         ejecutando = False
                     else:
-                        input_user += evento.unicode
+                        if len(input_user) < MAX_CARACTERES_USUARIO:
+                            input_user += evento.unicode
                 else:
                     if evento.key == pygame.K_BACKSPACE:
                         input_password = input_password[:-1]
@@ -70,31 +90,51 @@ def Inicio():
                             conn = mysql.connector.connect(**configuracion)
                             if conn.is_connected():
                                 print("Conexión establecida con éxito")
-                                dibujar_texto(
-                                    "Conexión establecida con éxito", fuente_titulo, NEGRO, pantalla, ANCHO // 2, ALTO // 2 + 50)
+                                Mostrar_Pedidos()
                         except mysql.connector.Error as notificacion:
                             print(f"Error al conectar a la base de datos MySQL: {
                                   notificacion}")
-                            dibujar_texto(f"Error al conectar a la base de datos MySQL: {
-                                          notificacion}", fuente_titulo, NEGRO, pantalla, ANCHO // 2, ALTO // 2 + 50)
+                            mostrar_mensaje_error(
+                                "Usuario y/o contraseña son incorrectos")
+                            input_user = ''
+                            input_password = ''
                         finally:
                             if "conn" in locals() and conn.is_connected():
                                 conn.close()
                                 print("Conexión cerrada")
-                        ejecutando = False
+                                ejecutando = False
                     else:
-                        input_password += evento.unicode
+                        if len(input_password) < MAX_CARACTERES_PASSWORD:
+                            input_password += evento.unicode
+            elif evento.type == pygame.MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = evento.pos
+                if ANCHO // 2.5 <= mouse_x <= ANCHO // 2.5 + 300 and ALTO // 1.9 <= mouse_y <= ALTO // 1.9 + 30:
+                    is_typing_user = True
+                elif ANCHO // 2.5 <= mouse_x <= ANCHO // 2.5 + 300 and ALTO // 1.5 <= mouse_y <= ALTO // 1.5 + 30:
+                    is_typing_user = False
 
-        pygame.draw.rect(pantalla, GRIS, (300, 150, 300, 30)
-                         )  # Cuadro para usuario
-        pygame.draw.rect(pantalla, GRIS, (300, 200, 300, 30)
-                         )  # Cuadro para contraseña
+        # Cuadro para colocar objetos del login
+        pygame.draw.rect(pantalla, VERDE_GRIS,
+                         (ANCHO // 2.72, ALTO // 3.5, 400, 500))
+        # Cuadro para usuario
+        pygame.draw.rect(pantalla, AMARILLO_VERDOSO,
+                         (ANCHO // 2.5, ALTO // 1.9, 300, 30))
+        # Cuadro para contraseña
+        pygame.draw.rect(pantalla, AMARILLO_VERDOSO,
+                         (ANCHO // 2.5, ALTO // 1.5, 300, 30))
 
-        dibujar_texto("Usuario:", fuente_titulo, NEGRO, pantalla, 150, 135)
-        dibujar_texto("Contraseña:", fuente_titulo, NEGRO, pantalla, 150, 185)
-        dibujar_texto(input_user, fuente_titulo, NEGRO, pantalla, 450, 155)
-        dibujar_texto("*" * len(input_password),
-                      fuente_titulo, NEGRO, pantalla, 450, 205)
+        # Círculo de logotipo
+        pantalla.blit(logotipo, (ANCHO // 2.01 - logotipo.get_width() //
+                      2, ALTO // 3.5 - logotipo.get_height() // 2))
+
+        dibujar_texto("Usuario:", fuente_titulo, NEGRO,
+                      pantalla, ANCHO // 2, ALTO // 2.05)
+        dibujar_texto("Contraseña:", fuente_titulo, NEGRO,
+                      pantalla, ANCHO // 2, ALTO // 1.65)
+        dibujar_texto(input_user, fuente_input, NEGRO,
+                      pantalla, ANCHO // 2, ALTO // 1.85)
+        dibujar_texto("*" * len(input_password), fuente_input,
+                      NEGRO, pantalla, ANCHO // 2, ALTO // 1.44)
 
         pygame.display.flip()
 
