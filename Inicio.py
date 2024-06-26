@@ -12,7 +12,7 @@ ANCHO, ALTO = info_pantalla.current_w, info_pantalla.current_h
 # Colores
 BLANCO = (255, 255, 255)
 NEGRO = (0, 0, 0)
-GRIS = (200, 200, 200)
+GRIS = (253, 250, 235)
 AZUL_CLARO = (205, 242, 214)
 VERDE_GRIS = (151, 196, 173)
 AMARILLO_VERDOSO = (230, 252, 217)
@@ -26,6 +26,7 @@ pygame.display.set_caption("Iniciar sesión")
 
 # Fuentes para el texto
 fuente_titulo = pygame.font.Font("Font/Lost_Signal_Regular.otf", 45)
+fuente_boton = pygame.font.Font("Font/Lost_Signal_Regular.otf", 27)
 fuente_input = pygame.font.Font("Font/Delmon_Delicate.ttf", 30)
 
 # Datos de conexión a la base de datos
@@ -61,6 +62,7 @@ def Inicio():
     input_user = ''
     input_password = ''
     is_typing_user = True
+    boton_iniciar_sesion = pygame.Rect(ANCHO // 2.23, ALTO // 1.31, 160, 30)
 
     while ejecutando:
         pantalla.fill(AZUL_CLARO)
@@ -112,6 +114,28 @@ def Inicio():
                     is_typing_user = True
                 elif ANCHO // 2.5 <= mouse_x <= ANCHO // 2.5 + 300 and ALTO // 1.5 <= mouse_y <= ALTO // 1.5 + 30:
                     is_typing_user = False
+                elif boton_iniciar_sesion.collidepoint(mouse_x, mouse_y):
+                    if input_user and input_password:
+                        configuracion['user'] = input_user
+                        configuracion['password'] = input_password
+
+                        try:
+                            conn = mysql.connector.connect(**configuracion)
+                            if conn.is_connected():
+                                print("Conexión establecida con éxito")
+                                Mostrar_Pedidos()
+                        except mysql.connector.Error as notificacion:
+                            print(f"Error al conectar a la base de datos MySQL: {
+                                  notificacion}")
+                            mostrar_mensaje_error(
+                                "Usuario y/o contraseña son incorrectos")
+                            input_user = ''
+                            input_password = ''
+                        finally:
+                            if "conn" in locals() and conn.is_connected():
+                                conn.close()
+                                print("Conexión cerrada")
+                                ejecutando = False
 
         # Cuadro para colocar objetos del login
         pygame.draw.rect(pantalla, VERDE_GRIS,
@@ -122,6 +146,10 @@ def Inicio():
         # Cuadro para contraseña
         pygame.draw.rect(pantalla, AMARILLO_VERDOSO,
                          (ANCHO // 2.5, ALTO // 1.5, 300, 30))
+        # Botón de Iniciar sesión
+        pygame.draw.rect(pantalla, GRIS, boton_iniciar_sesion)
+        dibujar_texto("Iniciar sesión", fuente_boton, NEGRO,
+                      pantalla, ANCHO // 2, ALTO // 1.28)
 
         # Círculo de logotipo
         pantalla.blit(logotipo, (ANCHO // 2.01 - logotipo.get_width() //
