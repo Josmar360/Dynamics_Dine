@@ -1,0 +1,20 @@
+PK_ID_PLATILLO,PLATILLOS,FK_ID_TIPO,PRECIOS
+POZP,Pozole de pollo,P,89
+POZC,Pozole de cabeza,P,89
+POZM,Pozole mixto,P,89
+ENCHP,Enchiladas con pollo,P,76
+ENF,Enfrijoladas,P,76
+CHILP,Chilaquiles con pollo,P,76
+CHILC,Chilaquiles con carne,P,76
+COCA,Coca-cola,B,21
+SP,Sprite,B,21
+BON,Boing,B,21
+VIC,Victoria,B,37
+COR,Corona,B,37
+CF,Café,B,38
+AG,Agua,B,19
+GUA,Guacamole,E,48
+CRM,Crema,E,31
+QUS,Queso,E,23
+FLN,Flan,PO,46
+ACL,Arroz con leche,PO,49
