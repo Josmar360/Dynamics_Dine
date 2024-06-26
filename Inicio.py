@@ -158,7 +158,7 @@ def Inicio():
         dibujar_texto("Usuario:", fuente_titulo, NEGRO,
                       pantalla, ANCHO // 2, ALTO // 2.05)
         dibujar_texto("Contraseña:", fuente_titulo, NEGRO,
-                      pantalla, ANCHO // 2, ALTO // 1.65)
+                      pantalla, ANCHO // 2, ALTO // 1.59)
         dibujar_texto(input_user, fuente_input, NEGRO,
                       pantalla, ANCHO // 2, ALTO // 1.85)
         dibujar_texto("*" * len(input_password), fuente_input,
