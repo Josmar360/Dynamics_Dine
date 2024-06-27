@@ -64,6 +64,7 @@ def Inicio():
     input_password = ''
     is_typing_user = True
     boton_iniciar_sesion = pygame.Rect(ANCHO // 2.25, ALTO // 1.31, 150, 30)
+    boton_salir_rect = pygame.Rect(30, ALTO - 70, 130, 30)
 
     while ejecutando:
         pantalla.fill(AZUL_CLARO)
@@ -136,9 +137,7 @@ def Inicio():
                                 conn.close()
                                 print("Conexión cerrada")
                                 ejecutando = False
-            elif evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
-                mouse_pos = evento.pos
-                if boton_salir_rect.collidepoint(mouse_pos):
+                elif boton_salir_rect.collidepoint(mouse_x, mouse_y):
                     ejecutando = False
 
         # Cuadro para colocar objetos del login
