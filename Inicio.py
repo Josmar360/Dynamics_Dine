@@ -28,6 +28,7 @@ pygame.display.set_caption("Iniciar sesión")
 fuente_titulo = pygame.font.Font("Font/Lost_Signal_Regular.otf", 45)
 fuente_boton = pygame.font.Font("Font/Lost_Signal_Regular.otf", 27)
 fuente_input = pygame.font.Font("Font/Delmon_Delicate.ttf", 30)
+fuente_texto = pygame.font.Font(None, 36)
 
 # Datos de conexión a la base de datos
 configuracion = {
@@ -62,7 +63,7 @@ def Inicio():
     input_user = ''
     input_password = ''
     is_typing_user = True
-    boton_iniciar_sesion = pygame.Rect(ANCHO // 2.23, ALTO // 1.31, 160, 30)
+    boton_iniciar_sesion = pygame.Rect(ANCHO // 2.25, ALTO // 1.31, 150, 30)
 
     while ejecutando:
         pantalla.fill(AZUL_CLARO)
@@ -92,7 +93,7 @@ def Inicio():
                             conn = mysql.connector.connect(**configuracion)
                             if conn.is_connected():
                                 print("Conexión establecida con éxito")
-                                Mostrar_Pedidos()
+                                Mostrar_Pedidos(configuracion)
                         except mysql.connector.Error as notificacion:
                             print(f"Error al conectar a la base de datos MySQL: {
                                   notificacion}")
@@ -118,7 +119,6 @@ def Inicio():
                     if input_user and input_password:
                         configuracion['user'] = input_user
                         configuracion['password'] = input_password
-
                         try:
                             conn = mysql.connector.connect(**configuracion)
                             if conn.is_connected():
@@ -136,24 +136,28 @@ def Inicio():
                                 conn.close()
                                 print("Conexión cerrada")
                                 ejecutando = False
+            elif evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
+                mouse_pos = evento.pos
+                if boton_salir_rect.collidepoint(mouse_pos):
+                    ejecutando = False
 
         # Cuadro para colocar objetos del login
         pygame.draw.rect(pantalla, VERDE_GRIS,
-                         (ANCHO // 2.72, ALTO // 3.5, 400, 500))
+                         (ANCHO // 2.82, ALTO // 3.5, 400, 500))
         # Cuadro para usuario
         pygame.draw.rect(pantalla, AMARILLO_VERDOSO,
-                         (ANCHO // 2.5, ALTO // 1.9, 300, 30))
+                         (ANCHO // 2.55, ALTO // 1.9, 300, 30))
         # Cuadro para contraseña
         pygame.draw.rect(pantalla, AMARILLO_VERDOSO,
-                         (ANCHO // 2.5, ALTO // 1.5, 300, 30))
+                         (ANCHO // 2.55, ALTO // 1.5, 300, 30))
         # Botón de Iniciar sesión
         pygame.draw.rect(pantalla, GRIS, boton_iniciar_sesion)
         dibujar_texto("Iniciar sesión", fuente_boton, NEGRO,
                       pantalla, ANCHO // 2, ALTO // 1.28)
 
         # Círculo de logotipo
-        pantalla.blit(logotipo, (ANCHO // 2.01 - logotipo.get_width() //
-                      2, ALTO // 3.5 - logotipo.get_height() // 2))
+        pantalla.blit(logotipo, (ANCHO // 2.0 - logotipo.get_width() //
+                      2, ALTO // 3.8 - logotipo.get_height() // 2))
 
         dibujar_texto("Usuario:", fuente_titulo, NEGRO,
                       pantalla, ANCHO // 2, ALTO // 2.05)
@@ -163,6 +167,11 @@ def Inicio():
                       pantalla, ANCHO // 2, ALTO // 1.85)
         dibujar_texto("*" * len(input_password), fuente_input,
                       NEGRO, pantalla, ANCHO // 2, ALTO // 1.44)
+
+        # Crear botón "Salir"
+        boton_salir_rect = pygame.Rect(30, ALTO - 70, 130, 30)
+        pygame.draw.rect(pantalla, GRIS, boton_salir_rect)
+        dibujar_texto("Salir", fuente_texto, NEGRO, pantalla, 95, ALTO - 55)
 
         pygame.display.flip()
 
