@@ -114,8 +114,8 @@ El presente repositorio representa un proyecto integral de diseño y desarrollo 
 
 ---
 
-[Josmar Gustavo Palomino Castelan](https://linktr.ee/josmar360)
-[Paola Espinoza Alvares](https://github.com/Paoinoza)
+- [Josmar Gustavo Palomino Castelan](https://linktr.ee/josmar360)
+- [Paola Espinoza Alvares](https://github.com/Paoinoza)
 
 # Información adicional
 
