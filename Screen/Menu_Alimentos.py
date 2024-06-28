@@ -8,7 +8,6 @@ from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
 import mysql.connector
 
-
 # Configuración de la base de datos
 configuracion = {
     'host': 'localhost',
@@ -16,6 +15,9 @@ configuracion = {
     'password': 'Sarinha_3',
     'database': 'Dynamics_Dine'
 }
+
+# Variable global para almacenar los productos seleccionados y sus cantidades
+selected_products = {}
 
 
 class ProductCard(GridLayout):
@@ -59,11 +61,21 @@ class ProductCard(GridLayout):
     def increment_quantity(self, instance):
         self.quantity += 1
         self.quantity_label.text = str(self.quantity)
+        selected_products[self.product_name] = {
+            'name': self.product_name,
+            'image': self.product_image,
+            'price': self.product_price,
+            'quantity': self.quantity
+        }
 
     def decrement_quantity(self, instance):
         if self.quantity > 0:
             self.quantity -= 1
             self.quantity_label.text = str(self.quantity)
+            if self.quantity == 0:
+                del selected_products[self.product_name]
+            else:
+                selected_products[self.product_name]['quantity'] = self.quantity
 
 
 class Menu_Alimentos(Screen):
@@ -116,3 +128,21 @@ class Menu_Alimentos(Screen):
             tab_panel.add_widget(tab)
 
         self.add_widget(tab_panel)
+
+        # Agregar los botones de Salir y Pagar
+        button_layout = GridLayout(cols=2, size_hint=(1, None), height=50)
+        pagar_button = Button(text='Pagar', size_hint=(0.5, 1))
+        pagar_button.bind(on_press=self.go_to_pagar)
+        salir_button = Button(text='Salir', size_hint=(0.5, 1))
+        salir_button.bind(on_press=self.go_to_bienvenida)
+
+        button_layout.add_widget(salir_button)
+        button_layout.add_widget(pagar_button)
+
+        self.add_widget(button_layout)
+
+    def go_to_pagar(self, instance):
+        self.manager.current = 'pagar'
+
+    def go_to_bienvenida(self, instance):
+        self.manager.current = 'bienvenida'

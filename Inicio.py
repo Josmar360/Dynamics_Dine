@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
 from Screen.Bienvenida import Bienvenida
 from Screen.Menu_Alimentos import Menu_Alimentos
+from Screen.Pagar import Pagar
 
 
 class InicioApp(App):
@@ -11,6 +12,7 @@ class InicioApp(App):
         # Agregar las pantallas al ScreenManager
         self.screen_manager.add_widget(Bienvenida(name='bienvenida'))
         self.screen_manager.add_widget(Menu_Alimentos(name='menu_alimentos'))
+        self.screen_manager.add_widget(Pagar(name='pagar'))
 
         # Mostrar la pantalla de bienvenida al inicio
         self.screen_manager.current = 'bienvenida'
