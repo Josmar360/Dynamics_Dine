@@ -14,20 +14,20 @@ class Carrito_Compras(Screen):
         self.update_screen()
 
     def update_screen(self):
-        # Clear previous widgets
+        # Limpiar widgets previos
         self.clear_widgets()
 
-        # Scroll view for the product list
+        # Scroll view para la lista de productos
         scrollview = ScrollView(size_hint=(1, None), size=(
             Window.width, Window.height - 20))
 
-        # Layout to display selected products
+        # Diseño para mostrar los productos seleccionados
         layout = GridLayout(cols=3, spacing=10, size_hint_y=None)
         layout.bind(minimum_height=layout.setter('height'))
 
         total = 0.0
 
-        # Loop through selected_products to display each product
+        # Recorrer selected_products para mostrar cada producto
         for product in selected_products.values():
             if product['quantity'] > 0:
                 subtotal = product['quantity'] * product['price']
@@ -51,26 +51,35 @@ class Carrito_Compras(Screen):
 
         scrollview.add_widget(layout)
 
-        # Total label
+        # Etiqueta de Total
         total_label = Label(text=f"Total a Pagar: ${
                             total:.2f}", font_size='24sp', size_hint_y=None, height=50, halign='center', valign='middle')
         total_label.bind(size=total_label.setter('text_size')
-                         )  # Ensure the text is centered
-
-        # Back button
-        back_button = Button(text='Regresar', size_hint=(1, None), height=50)
-        back_button.bind(on_press=self.go_back)
-
-        # Layout for total label and back button
+                         )  # Asegurar que el texto esté centrado
+        # Diseño para la etiqueta de total
         bottom_layout = GridLayout(cols=1, size_hint_y=None, height=100)
         bottom_layout.add_widget(total_label)
-        bottom_layout.add_widget(back_button)
 
-        # Adding widgets to the screen
+        # Agregar widgets a la pantalla
         self.add_widget(scrollview)
         self.add_widget(bottom_layout)
 
-    def go_back(self, instance):
+        # Agregar los botones de Salir y Pagar
+        button_layout = GridLayout(cols=2, size_hint=(1, None), height=50)
+        pagar_button = Button(text='Pagar', size_hint=(0.5, 1))
+        pagar_button.bind(on_press=self.go_to_pagar)
+        regresar_button = Button(text='Regresar', size_hint=(0.5, 1))
+        regresar_button.bind(on_press=self.go_to_menu_alimentos)
+
+        button_layout.add_widget(regresar_button)
+        button_layout.add_widget(pagar_button)
+
+        self.add_widget(button_layout)
+
+    def go_to_pagar(self, instance):
+        self.manager.current = 'pagar'
+
+    def go_to_menu_alimentos(self, instance):
         self.manager.current = 'menu_alimentos'
 
     def on_pre_enter(self):

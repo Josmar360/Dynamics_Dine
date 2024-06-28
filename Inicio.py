@@ -1,8 +1,10 @@
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
+from Screen.Seleccion_Mesa import Seleccion_Mesa
 from Screen.Bienvenida import Bienvenida
 from Screen.Menu_Alimentos import Menu_Alimentos
 from Screen.Carrito_Compras import Carrito_Compras
+from Screen.Procesar_Pago import Procesar_Pago
 
 
 class InicioApp(App):
@@ -10,12 +12,14 @@ class InicioApp(App):
         self.screen_manager = ScreenManager()
 
         # Agregar las pantallas al ScreenManager
+        self.screen_manager.add_widget(Seleccion_Mesa(name='mesa'))
         self.screen_manager.add_widget(Bienvenida(name='bienvenida'))
         self.screen_manager.add_widget(Menu_Alimentos(name='menu_alimentos'))
         self.screen_manager.add_widget(Carrito_Compras(name='carrito'))
+        self.screen_manager.add_widget(Procesar_Pago(name='pagar'))
 
-        # Mostrar la pantalla de bienvenida al inicio
-        self.screen_manager.current = 'bienvenida'
+        # Mostrar la pantalla de seleccion de mesa al inicio
+        self.screen_manager.current = 'mesa'
 
         return self.screen_manager
 
