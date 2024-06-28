@@ -15,7 +15,7 @@ Este proyecto es un sistema de gestión de pedidos para un restaurante conocida 
 - [Descripción del proyecto](#descripción-del-proyecto)
 - [Herramientas utilizadas](#herramientas-utilizadas)
 - [Guía de instalación](#guía-de-instalación)
-- [Autor](#autores)
+- [Autores](#autores)
 - [Información adicional](#información-adicional)
 
 # Badges
@@ -107,7 +107,7 @@ El presente repositorio representa un proyecto integral de diseño y desarrollo 
 
 2. Ejecuta el archivo principal del proyecto:
    ```sh
-   python main.py
+   python Inicio.py
    ```
 
 # Autor/es
