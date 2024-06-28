@@ -18,11 +18,11 @@ class Pagar(Screen):
         self.clear_widgets()
 
         # Scroll view for the product list
-        scrollview = ScrollView(size_hint=(
-            1, None), size=(Window.width, Window.height))
+        scrollview = ScrollView(size_hint=(1, None), size=(
+            Window.width, Window.height - 20))
 
         # Layout to display selected products
-        layout = GridLayout(cols=2, spacing=10, size_hint_y=None)
+        layout = GridLayout(cols=3, spacing=10, size_hint_y=None)
         layout.bind(minimum_height=layout.setter('height'))
 
         total = 0.0
@@ -37,7 +37,7 @@ class Pagar(Screen):
                     cols=1, padding=10, spacing=10, size_hint_y=None, height=300)
 
                 product_layout.add_widget(
-                    Image(source=product['image'], size_hint=(1, 0.8)))
+                    Image(source=product['image'], size_hint=(1, 0.6)))
                 product_layout.add_widget(
                     Label(text=product['name'], size_hint=(1, 0.1)))
                 product_layout.add_widget(
@@ -49,18 +49,26 @@ class Pagar(Screen):
 
                 layout.add_widget(product_layout)
 
-        layout.add_widget(Label(text=f"Total a Pagar: ${
-                          total:.2f}", font_size='24sp', size_hint_y=20, height=40))
-
         scrollview.add_widget(layout)
+
+        # Total label
+        total_label = Label(text=f"Total a Pagar: ${
+                            total:.2f}", font_size='24sp', size_hint_y=None, height=50, halign='center', valign='middle')
+        total_label.bind(size=total_label.setter('text_size')
+                         )  # Ensure the text is centered
 
         # Back button
         back_button = Button(text='Regresar', size_hint=(1, None), height=50)
         back_button.bind(on_press=self.go_back)
 
+        # Layout for total label and back button
+        bottom_layout = GridLayout(cols=1, size_hint_y=None, height=100)
+        bottom_layout.add_widget(total_label)
+        bottom_layout.add_widget(back_button)
+
         # Adding widgets to the screen
         self.add_widget(scrollview)
-        self.add_widget(back_button)
+        self.add_widget(bottom_layout)
 
     def go_back(self, instance):
         self.manager.current = 'menu_alimentos'
