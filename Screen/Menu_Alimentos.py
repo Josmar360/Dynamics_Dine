@@ -142,7 +142,7 @@ class Menu_Alimentos(Screen):
         self.add_widget(button_layout)
 
     def go_to_pagar(self, instance):
-        self.manager.current = 'pagar'
+        self.manager.current = 'carrito'
 
     def go_to_bienvenida(self, instance):
         self.manager.current = 'bienvenida'

@@ -8,7 +8,7 @@ from kivy.core.window import Window
 from Screen.Menu_Alimentos import selected_products
 
 
-class Pagar(Screen):
+class Carrito_Compras(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.update_screen()
