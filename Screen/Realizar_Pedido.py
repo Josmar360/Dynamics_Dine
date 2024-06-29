@@ -1,4 +1,3 @@
-# Realizar_Pedido.py
 from kivy.uix.screenmanager import Screen
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
@@ -49,3 +48,9 @@ class Realizar_Pedido(Screen):
             # Aquí deberías insertar en la base de datos usando el número de mesa seleccionada
         else:
             print("No se ha seleccionado ninguna mesa.")
+
+    # Método para mostrar los valores de custom_selected
+    def mostrar_custom_selected(self, custom_selected):
+        print("\nProductos personalizados desde Menu_Alimentos:")
+        for fk_platillo, quantity in custom_selected.items():
+            print(f"FK_Platillo: {fk_platillo}, Cantidad: {quantity}")

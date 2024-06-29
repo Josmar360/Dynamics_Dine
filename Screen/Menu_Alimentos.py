@@ -18,10 +18,11 @@ configuracion = {
 
 # Variable global para almacenar los productos seleccionados y sus cantidades
 selected_products = {}
+custom_selected = {}  # Nueva variable para personalización
 
 
 class ProductCard(GridLayout):
-    def __init__(self, product_name, product_image, product_price, **kwargs):
+    def __init__(self, product_name, product_image, product_price, fk_platillo, **kwargs):
         super().__init__(**kwargs)
         self.cols = 1
         self.padding = 10
@@ -32,6 +33,7 @@ class ProductCard(GridLayout):
         self.product_name = product_name
         self.product_image = product_image
         self.product_price = product_price
+        self.fk_platillo = fk_platillo
         self.quantity = 0
 
         # Ajustar el tamaño de la imagen
@@ -61,6 +63,8 @@ class ProductCard(GridLayout):
     def increment_quantity(self, instance):
         self.quantity += 1
         self.quantity_label.text = str(self.quantity)
+
+        # Actualizar selected_products
         selected_products[self.product_name] = {
             'name': self.product_name,
             'image': self.product_image,
@@ -68,14 +72,25 @@ class ProductCard(GridLayout):
             'quantity': self.quantity
         }
 
+        # Personalizar custom_selected_products
+        custom_selected[self.fk_platillo] = self.quantity
+
     def decrement_quantity(self, instance):
         if self.quantity > 0:
             self.quantity -= 1
             self.quantity_label.text = str(self.quantity)
+
+            # Actualizar selected_products
             if self.quantity == 0:
                 del selected_products[self.product_name]
             else:
                 selected_products[self.product_name]['quantity'] = self.quantity
+
+            # Personalizar custom_selected_products
+            if self.quantity == 0 and self.fk_platillo in custom_selected:
+                del custom_selected[self.fk_platillo]
+            elif self.fk_platillo in custom_selected:
+                custom_selected[self.fk_platillo] = self.quantity
 
 
 class Menu_Alimentos(Screen):
@@ -108,7 +123,8 @@ class Menu_Alimentos(Screen):
             product = {
                 'name': row['Platillos'],
                 'image': f"Image/{row['FK_Platillo']}.jpg",
-                'price': row['Precios']
+                'price': row['Precios'],
+                'fk_platillo': row['FK_Platillo']
             }
             categories[row['Tipo_Platillo']].append(product)
 
@@ -122,7 +138,7 @@ class Menu_Alimentos(Screen):
             layout.bind(minimum_height=layout.setter('height'))
             for product in products:
                 layout.add_widget(ProductCard(
-                    product_name=product['name'], product_image=product['image'], product_price=product['price']))
+                    product_name=product['name'], product_image=product['image'], product_price=product['price'], fk_platillo=product['fk_platillo']))
             scrollview.add_widget(layout)
             tab.add_widget(scrollview)
             tab_panel.add_widget(tab)
@@ -142,6 +158,17 @@ class Menu_Alimentos(Screen):
         self.add_widget(button_layout)
 
     def go_to_pagar(self, instance):
+        # print("Productos seleccionados:")
+        # for product in selected_products.values():
+        # print(f"Nombre: {product['name']}, FK_Platillo: {product['image']} Precio: {
+        # product['price']}, Cantidad: {product['quantity']}")
+
+        # print("\nProductos personalizados:")
+        # for fk_platillo, quantity in custom_selected.items():
+        # print(f"FK_Platillo: {fk_platillo}, Cantidad: {quantity}")
+        realizando_pedido_screen = self.manager.get_screen('realizar_pedido')
+        realizando_pedido_screen.mostrar_custom_selected(custom_selected)
+
         self.manager.current = 'carrito'
 
     def go_to_bienvenida(self, instance):
