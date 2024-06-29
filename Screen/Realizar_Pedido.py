@@ -40,10 +40,10 @@ class Realizar_Pedido(Screen):
 
         # Agregar botón de actualizar
         button_layout = GridLayout(cols=2, size_hint=(1, None), height=50)
-        actualizar_button = Button(
-            text='Actualizar', size_hint=(1, None), height=50)
-        actualizar_button.bind(on_press=self.actualizar_pedido)
-        button_layout.add_widget(actualizar_button)
+        aceptar_button = Button(
+            text='Aceptar', size_hint=(1, None), height=50)
+        aceptar_button.bind(on_press=self.aceptar_pedido)
+        button_layout.add_widget(aceptar_button)
 
         layout.add_widget(button_layout)
 
@@ -53,7 +53,7 @@ class Realizar_Pedido(Screen):
         self.mesa_seleccionada = mesa_seleccionada
         self.mesa_label.text = f'Mesa seleccionada: {self.mesa_seleccionada}'
 
-    def actualizar_pedido(self, instance):
+    def aceptar_pedido(self, instance):
         if self.mesa_seleccionada is not None:
             print("Actualizando pedido para mesa número:", self.mesa_seleccionada)
             # Aquí deberías insertar en la base de datos usando el número de mesa seleccionada
@@ -71,8 +71,10 @@ class Realizar_Pedido(Screen):
 
     # Método para actualizar el precio total
     def actualizar_precio_total(self, total):
-        self.total_label.text = f'Total a Pagar: ${total:.2f}'
-        print(f"Total a pagar es: {total}")
+        global total_a_pagar  # Hacer referencia a la variable global
+        total_a_pagar = total  # Actualizar el valor global
+        self.total_label.text = f'Total a Pagar: ${total_a_pagar:.2f}'
+        print(f"Total a pagar es: {total_a_pagar}")
 
     # Método para insertar el pedido en la base de datos
     def insertar_pedido(self, mesa, total, custom_selected):
@@ -92,7 +94,7 @@ class Realizar_Pedido(Screen):
 
             # Insertar datos en la tabla Pedidos y obtener el ID generado
             insert_pedido_query = "INSERT INTO Pedidos (Mesa, Total) VALUES (%s, %s);"
-            cursor.execute(insert_pedido_query, (mesa, total))
+            cursor.execute(insert_pedido_query, (mesa, total_a_pagar))
             conexion.commit()  # Guardamos los cambios para obtener el LAST_INSERT_ID
 
             # Obtener el ID generado en Pedidos
