@@ -72,7 +72,7 @@ class ProductCard(GridLayout):
             'quantity': self.quantity
         }
 
-        # Personalizar custom_selected_products
+        # Personalizar custom_selected
         custom_selected[self.fk_platillo] = self.quantity
 
     def decrement_quantity(self, instance):
@@ -86,7 +86,7 @@ class ProductCard(GridLayout):
             else:
                 selected_products[self.product_name]['quantity'] = self.quantity
 
-            # Personalizar custom_selected_products
+            # Personalizar custom_selected
             if self.quantity == 0 and self.fk_platillo in custom_selected:
                 del custom_selected[self.fk_platillo]
             elif self.fk_platillo in custom_selected:
