@@ -1,14 +1,17 @@
-from kivy.uix.screenmanager import Screen
+# Seleccion_Mesa.py
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
-
-selected_table = {}
+from Screen.Realizar_Pedido import Realizar_Pedido  # Importar la clase Realizar_Pedido
+from Screen.Bienvenida import Bienvenida  # Importar la clase Bienvenida
 
 
 class Seleccion_Mesa(Screen):
+    mesa_seleccionada = None  # Variable de clase para almacenar la mesa seleccionada
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -41,16 +44,17 @@ class Seleccion_Mesa(Screen):
             mesa_button = Button(text=f'Mesa {mesa_num}', size_hint=(
                 None, None), size=(200, 200))
             mesa_button.bind(on_press=lambda instance,
-                             mesa=mesa_num: self.select_table(mesa))
+                             mesa_num=mesa_num: self.select_table(mesa_num))
             button_layout.add_widget(mesa_button)
 
         return button_layout
 
     def select_table(self, mesa_num):
-        # Almacenar la selección de mesa en la variable global 'selected_table'
-        global selected_table
-        selected_table = mesa_num
-
-        # Cambiar a la siguiente pantalla después de seleccionar la mesa
-        # Cambia 'bienvenida' al nombre de tu siguiente pantalla
+        # Almacenar la selección de mesa en la variable de clase 'mesa_seleccionada'
+        self.mesa_seleccionada = mesa_num
+        # Cambiar a la pantalla de bienvenida primero
         self.manager.current = 'bienvenida'
+
+        # Llamar al método para actualizar mesa seleccionada en Realizar_Pedido
+        self.manager.get_screen('realizar_pedido').update_selected_table(
+            self.mesa_seleccionada)

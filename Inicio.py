@@ -18,7 +18,7 @@ class InicioApp(App):
         self.screen_manager.add_widget(Menu_Alimentos(name='menu_alimentos'))
         self.screen_manager.add_widget(Carrito_Compras(name='carrito'))
         self.screen_manager.add_widget(Procesar_Pago(name='pagar'))
-        self.screen_manager.add_widget(Realizar_Pedido(name='pedido'))
+        self.screen_manager.add_widget(Realizar_Pedido(name='realizar_pedido'))
 
         # Mostrar la pantalla de seleccion de mesa al inicio
         self.screen_manager.current = 'mesa'
