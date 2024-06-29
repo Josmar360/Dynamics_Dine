@@ -110,4 +110,4 @@ class Procesar_Pago(Screen):
         self.manager.current = 'carrito'
 
     def realizar_pago(self, instance):
-        self.manager.current = 'Pedido'
+        self.manager.current = 'pedido'
