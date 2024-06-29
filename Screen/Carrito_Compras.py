@@ -7,6 +7,9 @@ from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
 from Screen.Menu_Alimentos import selected_products
 
+# Variable global para almacenar el total a pagar
+total_a_pagar = 0.0
+
 
 class Carrito_Compras(Screen):
     def __init__(self, **kwargs):
@@ -25,13 +28,15 @@ class Carrito_Compras(Screen):
         layout = GridLayout(cols=3, spacing=10, size_hint_y=None)
         layout.bind(minimum_height=layout.setter('height'))
 
-        total = 0.0
+        # Reiniciar el total
+        global total_a_pagar
+        total_a_pagar = 0.0
 
         # Recorrer selected_products para mostrar cada producto
         for product in selected_products.values():
             if product['quantity'] > 0:
                 subtotal = product['quantity'] * product['price']
-                total += subtotal
+                total_a_pagar += subtotal
 
                 product_layout = GridLayout(
                     cols=1, padding=10, spacing=10, size_hint_y=None, height=300)
@@ -53,9 +58,9 @@ class Carrito_Compras(Screen):
 
         # Etiqueta de Total
         total_label = Label(text=f"Total a Pagar: ${
-                            total:.2f}", font_size='24sp', size_hint_y=None, height=50, halign='center', valign='middle')
-        total_label.bind(size=total_label.setter('text_size')
-                         )  # Asegurar que el texto esté centrado
+                            total_a_pagar:.2f}", font_size='24sp', size_hint_y=None, height=50, halign='center', valign='middle')
+        total_label.bind(size=total_label.setter(
+            'text_size'))  # Asegurar que el texto esté centrado
         # Diseño para la etiqueta de total
         bottom_layout = GridLayout(cols=1, size_hint_y=None, height=100)
         bottom_layout.add_widget(total_label)
@@ -77,6 +82,10 @@ class Carrito_Compras(Screen):
         self.add_widget(button_layout)
 
     def go_to_pagar(self, instance):
+        self.manager.current = 'realizar_pedido'
+        self.manager.get_screen('realizar_pedido').actualizar_precio_total(total_a_pagar)
+
+
         self.manager.current = 'pagar'
 
     def go_to_menu_alimentos(self, instance):

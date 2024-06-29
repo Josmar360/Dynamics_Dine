@@ -4,6 +4,9 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 
+# Importar la variable global total_a_pagar desde Carrito_Compras.py
+from Screen.Carrito_Compras import total_a_pagar
+
 
 class Realizar_Pedido(Screen):
     def __init__(self, **kwargs):
@@ -23,6 +26,11 @@ class Realizar_Pedido(Screen):
         self.mesa_label = Label(text='Mesa seleccionada: ',
                                 halign='center', size_hint=(1, None), height=40, font_size=24)
         layout.add_widget(self.mesa_label)
+
+        # Mostrar el total a pagar
+        self.total_label = Label(text=f'Total a Pagar: ${total_a_pagar:.2f}',
+                                 halign='center', size_hint=(1, None), height=40, font_size=24)
+        layout.add_widget(self.total_label)
 
         # Espacio para el botón de actualizar
         layout.add_widget(BoxLayout(size_hint_y=None, height=100))
@@ -45,7 +53,6 @@ class Realizar_Pedido(Screen):
     def actualizar_pedido(self, instance):
         if self.mesa_seleccionada is not None:
             print("Actualizando pedido para mesa número:", self.mesa_seleccionada)
-            # Aquí deberías insertar en la base de datos usando el número de mesa seleccionada
         else:
             print("No se ha seleccionado ninguna mesa.")
 
@@ -54,3 +61,8 @@ class Realizar_Pedido(Screen):
         print("\nProductos personalizados desde Menu_Alimentos:")
         for fk_platillo, quantity in custom_selected.items():
             print(f"FK_Platillo: {fk_platillo}, Cantidad: {quantity}")
+
+    # Método para actualizar el precio total
+    def actualizar_precio_total(self, total):
+        self.total_label.text = f'Total a Pagar: ${total:.2f}'
+        print(f"Total a pagar es: {total}")
