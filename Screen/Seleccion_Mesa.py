@@ -1,4 +1,3 @@
-# Seleccion_Mesa.py
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
