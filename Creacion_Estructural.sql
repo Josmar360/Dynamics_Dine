@@ -1,7 +1,12 @@
+-- Crear la base de datos llamada Dynamics_Dine
 CREATE SCHEMA DYNAMICS_DINE;
 
+
+-- Usar la base de datos Dynamics_Dine
 USE DYNAMICS_DINE;
 
+
+-- Crear la tabla Tipo_Platillo
 CREATE TABLE Tipo_Platillo
 (
 	PK_Tipo_Platillo VARCHAR(6) NOT NULL,
@@ -9,6 +14,8 @@ CREATE TABLE Tipo_Platillo
     CONSTRAINT Tipo_Platillo_PK PRIMARY KEY(PK_Tipo_Platillo)
 );
 
+
+-- Crear la tabla de Platillos
 CREATE TABLE Platillos
 (
 	FK_Platillo VARCHAR(10) NOT NULL,
@@ -19,6 +26,8 @@ CREATE TABLE Platillos
     CONSTRAINT Platillos_FK FOREIGN KEY(FK_Tipo_Platillo) REFERENCES Tipo_Platillo(PK_Tipo_Platillo)
 );
 
+
+-- Crear la tabla de Pedidos
 CREATE TABLE Pedidos
 (
 	PK_Num_Pedido INT AUTO_INCREMENT NOT NULL,
@@ -27,12 +36,15 @@ CREATE TABLE Pedidos
     CONSTRAINT Pedidos_PK PRIMARY KEY(PK_Num_Pedido)
 );
 
+
+-- Crear la tabla de Detalles_Pedido
 CREATE TABLE Detalles_Pedido
 (
 	FK_PK_Num_Pedido INT AUTO_INCREMENT NOT NULL,
     FK_PK_Platillo VARCHAR(10) NOT NULL,
     Cantidad INT NOT NULL, 
     Estatus BOOLEAN NOT NULL,
+    Entregado BOOLEAN NOT NULL,
     CONSTRAINT Detalles_Pedidos_PK PRIMARY KEY(FK_PK_Num_Pedido, FK_PK_Platillo),
     CONSTRAINT Detalles_Pedidos_Pedido_FK FOREIGN KEY(FK_PK_Num_Pedido) REFERENCES Pedidos(PK_Num_Pedido),
     CONSTRAINT Detalles_Pedidos_Platillo_FK FOREIGN KEY(FK_PK_Platillo) REFERENCES Platillos(FK_Platillo)
