@@ -38,7 +38,7 @@ class Seleccion_Mesa(Screen):
             cols=4, spacing=10, size_hint_y=None, padding=[50, 10])
         button_layout.bind(minimum_height=button_layout.setter('height'))
 
-        # Botones para seleccionar mesas (asumo diez mesas)
+        # Botones para seleccionar mesas (Se colocan 12 mesas por defecto)
         for mesa_num in range(1, 13):
             mesa_button = Button(text=f'Mesa {mesa_num}', size_hint=(
                 None, None), size=(200, 200))
@@ -54,10 +54,10 @@ class Seleccion_Mesa(Screen):
         # Cambiar a la pantalla de bienvenida primero
         self.manager.current = 'bienvenida'
 
-        # Llamar al método para actualizar mesa seleccionada en Realizar_Pedido
+        # Llamar al método para actualizar mesa seleccionada en Realizar_Pedido.py
         self.manager.get_screen('realizar_pedido').update_selected_table(
             self.mesa_seleccionada)
 
-        # Llamar al método para actualizar mesa seleccionada en Realizar_Pedido
+        # Llamar al método para actualizar mesa seleccionada en Estatus_Pedido.py
         self.manager.get_screen('estatus').update_selected_table(
             self.mesa_seleccionada)
