@@ -34,7 +34,7 @@ fuente_texto = pygame.font.Font(None, 36)
 configuracion = {
     'user': '',  # Inicialmente vacíos, se llenarán con la entrada del usuario
     'password': '',
-    'host': '', # Condifuración del host para l abase de datos
+    'host': 'localhost', # Condifuración del host para l abase de datos
     'database': 'Dynamics_Dine',
     'raise_on_warnings': True
 }
