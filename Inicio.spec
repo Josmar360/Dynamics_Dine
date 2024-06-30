@@ -7,8 +7,9 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=[
+        ('Font/*.otf', 'Font'),     # Incluir todas las fuentes .ttf en la carpeta Font
         ('Font/*.ttf', 'Font'),     # Incluir todas las fuentes .ttf en la carpeta Font
-        ('Image/*', 'Image'),       # Incluir todas las imágenes en la carpeta Image
+        ('Image/*.png', 'Image'),       # Incluir todas las imágenes en la carpeta Image
         ('Screen/*.py', 'Screen'),  # Incluir todos los archivos .py en la carpeta Screen
     ],
     hiddenimports=[],
@@ -26,7 +27,7 @@ pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
 exe = EXE(
     pyz,
     a.scripts,
-    [],
+    icon='Icon/Dynamics_Dine.png',  # Ruta al archivo .png que deseas usar como icono
     exclude_binaries=True,
     name='Inicio',
     debug=False,
