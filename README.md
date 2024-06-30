@@ -89,23 +89,23 @@ Guía de Instalación
 
 1. Descargar el Repositorio:
 
-- Ve al repositorio en GitHub: [Repositorio de la base de datos de "La Casa De Toño"](https://github.com/Josmar360/Dynamics_Dine/tree/Base_De_Datos) 
-- Haz clic en el botón verde "Code" y selecciona "Download ZIP".
-- Descomprime el archivo ZIP en la ubicación de tu elección.
+   - Ve al repositorio en GitHub: [Repositorio de la base de datos de "La Casa De Toño"](https://github.com/Josmar360/Dynamics_Dine/tree/Base_De_Datos)
+   - Haz clic en el botón verde "Code" y selecciona "Download ZIP".
+   - Descomprime el archivo ZIP en la ubicación de tu elección.
 
 2. Configurar la Base de Datos:
 
-- Ve al repositorio en GitHub: [Repositorio de la base de datos de "La Casa De Toño"](https://github.com/Josmar360/Dynamics_Dine/tree/Base_De_Datos)
-- Sigue los pasos de configuración para la base de datos.
+   - Ve al repositorio en GitHub: [Repositorio de la base de datos de "La Casa De Toño"](https://github.com/Josmar360/Dynamics_Dine/tree/Base_De_Datos)
+   - Sigue los pasos de configuración para la base de datos.
 
 3. Importación de Datos del Respaldo:
 
-- Abre MySQL Workbench y conéctate a tu servidor de base de datos.
-- Crea una nueva base de datos o selecciona la base de datos existente para "La Casa De Toño".
-- Ve a "Server" en el menú superior y selecciona "Data Import".
-- Selecciona "Import from Self-Contained File" y busca el archivo de respaldo de la base de datos [Respaldo_Datos.sql](https://github.com/Josmar360/Dynamics_Dine/blob/Base_De_Datos/Consultas_SQL.sql) incluido en el repositorio.
-- Asegúrate de seleccionar la base de datos correcta en "Default Target Schema".
-- Haz clic en "Start Import" para importar los datos del respaldo.
+   - Abre MySQL Workbench y conéctate a tu servidor de base de datos.
+   - Crea una nueva base de datos o selecciona la base de datos existente para "La Casa De Toño".
+   - Ve a "Server" en el menú superior y selecciona "Data Import".
+   - Selecciona "Import from Self-Contained File" y busca el archivo de respaldo de la base de datos [Respaldo_Datos.sql](https://github.com/Josmar360/Dynamics_Dine/blob/Base_De_Datos/Consultas_SQL.sql) incluido en el repositorio.
+   - Asegúrate de seleccionar la base de datos correcta en "Default Target Schema".
+   - Haz clic en "Start Import" para importar los datos del respaldo.
 
 # Autor/es
 
