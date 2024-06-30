@@ -11,13 +11,13 @@ class Bienvenida(Screen):
         # Usamos RelativeLayout para mayor flexibilidad en el posicionamiento
         layout = RelativeLayout()
 
-        # Agregar imagen grande
+        # Agregar imagen grande del logotipo
         logo = Image(source='Image/Logotipo.png',
                      size_hint=(None, None), size=(300, 300))
         layout.add_widget(logo)
         logo.pos_hint = {'center_x': 0.5, 'center_y': 0.7}
 
-        # Agregar texto de bienvenida
+        # Agregar texto de bienvenida abajo del logotipo
         welcome_label = Label(
             text='Bienvenido a la Casa De Toño', font_size=60, halign='center')
         layout.add_widget(welcome_label)
@@ -27,7 +27,7 @@ class Bienvenida(Screen):
 
     def on_touch_down(self, touch):
         super().on_touch_down(touch)
-        # Redirigir al siguiente screen cuando se hace clic en cualquier lugar
+        # Redirigir al siguiente screen cuando se hace clic en cualquier lugar Menu_Alimentos.py
         if touch.is_mouse_scrolling or touch.is_double_tap:
             return False  # Permitir que el evento se propague
         else:
