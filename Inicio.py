@@ -23,7 +23,7 @@ class InicioApp(App):
         self.screen_manager.add_widget(Estatus_Pedido(name='estatus'))
 
         # Mostrar la pantalla de seleccion de mesa al inicio
-        self.screen_manager.current = 'estatus'
+        self.screen_manager.current = 'mesa'
 
         return self.screen_manager
 

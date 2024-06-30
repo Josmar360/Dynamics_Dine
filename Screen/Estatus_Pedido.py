@@ -1,5 +1,5 @@
 from kivy.core.window import Window
-from kivy.uix.screenmanager import Screen
+from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
@@ -41,6 +41,7 @@ class ProductCard(BoxLayout):
 class Estatus_Pedido(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.mesa_seleccionada = None  # Inicializa la variable para el número de mesa
 
         # Layout principal
         layout = BoxLayout(orientation='vertical', padding=[
@@ -95,11 +96,17 @@ class Estatus_Pedido(Screen):
 
         self.add_widget(layout)
 
-        # Consultar el estatus de los pedidos
+    def update_selected_table(self, mesa_seleccionada):
+        self.mesa_seleccionada = mesa_seleccionada
+
+        # Actualizar la pantalla con la nueva mesa seleccionada
         self.consultar_estatus_pedidos()
 
     def consultar_estatus_pedidos(self):
         try:
+            if self.mesa_seleccionada is None:
+                return  # Si no hay mesa seleccionada, no hacer la consulta
+
             # Conexión a la base de datos
             conexion = mysql.connector.connect(
                 host='localhost',
@@ -110,15 +117,16 @@ class Estatus_Pedido(Screen):
 
             cursor = conexion.cursor()
 
-            # Realizar la consulta
+            # Realizar la consulta con la mesa seleccionada
             query = """
             SELECT PD.PK_Num_Pedido, P.Platillos, PD.Mesa, DP.Estatus, P.FK_Platillo
             FROM Pedidos PD
             JOIN Detalles_Pedido DP ON PD.PK_Num_Pedido = DP.FK_PK_Num_Pedido
             JOIN Platillos P ON DP.FK_PK_Platillo = P.FK_Platillo
-            WHERE PD.Mesa = 4 AND DP.Entregado = 0;
+            WHERE PD.Mesa = %s AND DP.Entregado = 0;
             """
-            cursor.execute(query)
+            cursor.execute(query, (self.mesa_seleccionada,)
+                           )  # Usar la mesa seleccionada
 
             # Limpiar el layout actual
             self.estatus_layout.clear_widgets()
@@ -130,8 +138,8 @@ class Estatus_Pedido(Screen):
                 self.numero_mesa_label.text = f'Número de mesa: {mesa}'
 
                 # Crear la tarjeta de producto
-                card = ProductCard(product_name=platillo, product_image=f'Image/{
-                                   fk_platillo}.jpg', product_status=self.get_status_text(estatus))
+                card = ProductCard(product_name=platillo, product_image=f'Image/{fk_platillo}.jpg',
+                                   product_status=self.get_status_text(estatus))
                 self.estatus_layout.add_widget(card)
 
         except mysql.connector.Error as err:
@@ -157,6 +165,9 @@ class Estatus_Pedido(Screen):
 
     def go_to_recoger(self, instance):
         try:
+            if self.mesa_seleccionada is None:
+                return  # No hacer nada si no hay mesa seleccionada
+
             # Conexión a la base de datos
             conexion = mysql.connector.connect(
                 host='localhost',
@@ -167,15 +178,15 @@ class Estatus_Pedido(Screen):
 
             cursor = conexion.cursor()
 
-            # Query para actualizar el estado a 'Recogido'
+            # Query para actualizar el estado a 'Recogido' usando la mesa seleccionada
             update_query = """
             UPDATE Detalles_Pedido AS DP
             JOIN Pedidos AS P ON DP.FK_PK_Num_Pedido = P.PK_Num_Pedido
             SET DP.Entregado = 1
-            WHERE DP.Estatus = 1 AND P.Mesa = 4;
+            WHERE DP.Estatus = 1 AND P.Mesa = %s;
             """
 
-            cursor.execute(update_query)
+            cursor.execute(update_query, (self.mesa_seleccionada,))
             conexion.commit()
 
             # Mostrar mensaje de éxito
@@ -185,7 +196,7 @@ class Estatus_Pedido(Screen):
                           size_hint=(None, None), size=(400, 200))
             popup.open()
 
-            # Actualizar la pantalla
+            # Actualizar la pantalla después de recoger los productos
             self.consultar_estatus_pedidos()
 
         except mysql.connector.Error as err:

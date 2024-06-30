@@ -59,6 +59,7 @@ class Realizar_Pedido(Screen):
             # Aquí deberías insertar en la base de datos usando el número de mesa seleccionada
             self.insertar_pedido(self.mesa_seleccionada,
                                  total_a_pagar, self.custom_selected)
+            self.manager.current = 'estatus'
         else:
             print("No se ha seleccionado ninguna mesa.")
 
@@ -103,9 +104,9 @@ class Realizar_Pedido(Screen):
 
             # Insertar en Detalles_Pedido usando el ID generado de Pedidos
             for fk_platillo, quantity in custom_selected.items():
-                insert_detalle_query = "INSERT INTO Detalles_Pedido (FK_PK_Num_Pedido, FK_PK_Platillo, Cantidad, Estatus) VALUES (%s, %s, %s, %s);"
+                insert_detalle_query = "INSERT INTO Detalles_Pedido (FK_PK_Num_Pedido, FK_PK_Platillo, Cantidad, Estatus, Entregado) VALUES (%s, %s, %s, %s, %s);"
                 cursor.execute(insert_detalle_query,
-                               (id_pedido, fk_platillo, quantity, 0))
+                               (id_pedido, fk_platillo, quantity, 0, 0))
 
             # Confirmar la transacción
             conexion.commit()

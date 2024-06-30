@@ -57,3 +57,7 @@ class Seleccion_Mesa(Screen):
         # Llamar al método para actualizar mesa seleccionada en Realizar_Pedido
         self.manager.get_screen('realizar_pedido').update_selected_table(
             self.mesa_seleccionada)
+
+        # Llamar al método para actualizar mesa seleccionada en Realizar_Pedido
+        self.manager.get_screen('estatus').update_selected_table(
+            self.mesa_seleccionada)
