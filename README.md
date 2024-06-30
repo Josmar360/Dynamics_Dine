@@ -81,13 +81,13 @@ El presente repositorio representa un proyecto integral de diseño y desarrollo 
 
 1. **Descargar el Repositorio:**
 
-   - Ve al repositorio en GitHub: https://github.com/Josmar360/Dynamics_Dine/tree/Aplicacion_Escritorio
+   - Ve al repositorio en GitHub: [Aplicación de escritorio](https://github.com/Josmar360/Dynamics_Dine/tree/Aplicacion_Escritorio)
    - Haz clic en el botón verde "Code" y selecciona "Download ZIP".
    - Descomprime el archivo ZIP en la ubicación de tu elección.
 
 2. **Configurar la Base de Datos:**
 
-   - Ve al repositorio en GitHub:https://github.com/Josmar360/Dynamics_Dine/tree/Base_De_Datos
+   - Ve al repositorio en GitHub: [Ir a base de datos](https://github.com/Josmar360/Dynamics_Dine/tree/Base_De_Datos) 
    - Sigue los pasos de configuración para la base de datos.
 
 3. **Iniciar el Proyecto en NetBeans:**
