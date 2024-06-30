@@ -5,6 +5,10 @@ from datetime import datetime
 # Inicialización de Pygame
 pygame.init()
 
+# Cargar ícono personalizado
+icono = pygame.image.load('Icon/Dynamics_Dine.png')
+pygame.display.set_icon(icono)
+
 # Dimensiones de la pantalla
 info_pantalla = pygame.display.Info()
 ANCHO, ALTO = info_pantalla.current_w, info_pantalla.current_h
