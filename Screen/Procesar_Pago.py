@@ -7,7 +7,7 @@ from kivy.uix.image import Image
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
 
-
+# Clase principal para procesar el pago (simulacion de pago)
 class Procesar_Pago(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -16,23 +16,23 @@ class Procesar_Pago(Screen):
         layout = BoxLayout(orientation='vertical', padding=[
                            30, 80, 30, 30], spacing=20)
 
-        # Título grande centrado
+        # Título grande y centrado
         titulo_grande = Label(text='Ingresar datos bancarios', halign='center',
                               valign='middle', size_hint=(1, None), height=40, font_size=50)
         layout.add_widget(titulo_grande)
 
-        # Imagen grande centrada
+        # Imagen grande centrada de los metodos de pago
         image_layout = BoxLayout(size_hint=(1, None), height=166)
         image = Image(source='Image/Formas_Pago.png',
                       size_hint=(None, None), size=(503, 166))
-        # Añadir un widget vacío antes de la imagen
+        # Añadir un widget vacío antes de la imagen para brindar un espacio
         image_layout.add_widget(Widget())
         image_layout.add_widget(image)
-        # Añadir un widget vacío después de la imagen
+        # Añadir un widget vacío después de la imagen para brindar un espacio
         image_layout.add_widget(Widget())
         layout.add_widget(image_layout)
 
-        # Cuadros de texto y etiquetas
+        # Cuadros de texto y etiquetas para los datos bancarios
         cuadros_layout = GridLayout(
             cols=2, spacing=10, size_hint_y=None, height=120)
 
@@ -41,7 +41,7 @@ class Procesar_Pago(Screen):
         self.cvv_input = TextInput(multiline=False, input_type='number',
                                    hint_text='CVV', size_hint_x=None, width=300, font_size=20)
 
-        # Layout para MM y AA
+        # Layout para MM y AA, por separacion de datos
         vencimiento_layout = BoxLayout(
             orientation='horizontal', spacing=10, size_hint_x=None, width=210)
         self.mes_venc_input = TextInput(
@@ -51,6 +51,7 @@ class Procesar_Pago(Screen):
         vencimiento_layout.add_widget(self.mes_venc_input)
         vencimiento_layout.add_widget(self.anno_venc_input)
 
+        # Textos del lado izquierdo de los cuadros mostrando que dato se debe ingresar
         cuadros_layout.add_widget(Label(
             text='Número de tarjeta:', halign='right', size_hint_x=None, width=300, font_size=20))
         cuadros_layout.add_widget(self.num_tarjeta_input)
@@ -64,11 +65,11 @@ class Procesar_Pago(Screen):
 
         # Agregar los botones de Regresar y Pagar
         button_layout = GridLayout(cols=2, size_hint=(1, None), height=50)
+        regresar_button = Button(text='Regresar', size_hint=(0.5, 1))
+        regresar_button.bind(on_press=self.go_to_carrito)
         self.pagar_button = Button(
             text='Pagar', disabled=True, size_hint=(0.5, 1))
         self.pagar_button.bind(on_press=self.realizar_pago)
-        regresar_button = Button(text='Regresar', size_hint=(0.5, 1))
-        regresar_button.bind(on_press=self.go_to_carrito)
 
         button_layout.add_widget(regresar_button)
         button_layout.add_widget(self.pagar_button)
@@ -87,15 +88,19 @@ class Procesar_Pago(Screen):
 
     def on_text_input(self, instance, value):
         # Verificar si todos los campos están completos y tienen la longitud adecuada para habilitar el botón Pagar
+        # El Numero de tarjeta deben ser valores en longitud igual a 16
         num_tarjeta_valid = len(self.num_tarjeta_input.text) == 16
+        # El CVV debe ser igual a 3 numeros
         cvv_valid = len(self.cvv_input.text) == 3
         try:
+            # El mes debe ser mayor o igual a 1 y menos o igual a 12
             mes = int(self.mes_venc_input.text)
             mes_valid = 1 <= mes <= 12
         except ValueError:
             mes_valid = False
 
         try:
+            # El año debe ser mayor o igual al que estamos actulmente
             anno = int(self.anno_venc_input.text)
             anno_valid = anno >= 24
         except ValueError:
@@ -106,8 +111,10 @@ class Procesar_Pago(Screen):
         else:
             self.pagar_button.disabled = True
 
+    # Funcion que permite regresar a la pantalla del carritode compras
     def go_to_carrito(self, instance):
         self.manager.current = 'carrito'
 
+    # Funcion para realizar el pago (simulacion) e ir a la pantalla del pedido realizado
     def realizar_pago(self, instance):
         self.manager.current = 'realizar_pedido'
