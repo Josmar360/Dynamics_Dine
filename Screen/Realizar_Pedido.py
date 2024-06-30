@@ -111,7 +111,7 @@ class Realizar_Pedido(Screen):
 
             # Confirmar la transacción
             conexion.commit()
-            print("Pedido insertado exitosamente.")
+            # print("Pedido insertado exitosamente.")
 
         except mysql.connector.Error as err:
             print(f"Error: {err}")
