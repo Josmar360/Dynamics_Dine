@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `dynamics_dine` /*!40100 DEFAULT CHARACTER SET ut
 USE `dynamics_dine`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
--- Host: localhost    Database: dynamics_dine
+-- Host: 192.168.100.4    Database: dynamics_dine
 -- ------------------------------------------------------
 -- Server version	8.0.37
 
@@ -29,11 +29,12 @@ CREATE TABLE `detalles_pedido` (
   `FK_PK_Platillo` varchar(10) NOT NULL,
   `Cantidad` int NOT NULL,
   `Estatus` tinyint(1) NOT NULL,
+  `Entregado` tinyint(1) NOT NULL,
   PRIMARY KEY (`FK_PK_Num_Pedido`,`FK_PK_Platillo`),
   KEY `Detalles_Pedidos_Platillo_FK` (`FK_PK_Platillo`),
   CONSTRAINT `Detalles_Pedidos_Pedido_FK` FOREIGN KEY (`FK_PK_Num_Pedido`) REFERENCES `pedidos` (`PK_Num_Pedido`),
   CONSTRAINT `Detalles_Pedidos_Platillo_FK` FOREIGN KEY (`FK_PK_Platillo`) REFERENCES `platillos` (`FK_Platillo`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +43,7 @@ CREATE TABLE `detalles_pedido` (
 
 LOCK TABLES `detalles_pedido` WRITE;
 /*!40000 ALTER TABLE `detalles_pedido` DISABLE KEYS */;
-INSERT INTO `detalles_pedido` VALUES (1,'COCA',1,1),(1,'FLN',1,1),(1,'POZP',1,1),(2,'ACL',1,1),(2,'CHILP',1,1),(3,'BON',1,1),(3,'COR',1,1),(3,'ENF',1,1),(4,'POZM',1,1),(4,'VIC',1,1),(5,'CF',1,1);
+INSERT INTO `detalles_pedido` VALUES (1,'COCA',1,1,1),(1,'FLN',1,1,1),(1,'POZP',1,1,1),(2,'ACL',1,1,1),(2,'CHILP',1,1,1),(3,'BON',1,1,1),(3,'COR',1,1,1),(3,'ENF',1,1,1),(4,'POZM',1,1,1),(4,'VIC',1,1,1),(5,'CF',1,1,1),(6,'COCA',2,1,1),(11,'COCA',2,1,1),(12,'AG',1,1,1),(13,'AG',1,1,1),(13,'COCA',1,1,1),(14,'CF',1,1,1),(15,'ACL',1,1,1),(15,'AG',1,1,1),(15,'CHILC',1,1,1),(15,'ENCHP',1,1,1),(15,'QUS',1,1,1),(16,'CF',1,1,1),(17,'CHILC',1,1,1),(17,'COCA',1,1,1),(17,'FLN',1,1,1),(17,'QUS',1,1,1),(18,'COR',1,1,1),(19,'ACL',1,1,1),(19,'BON',1,0,1),(19,'CHILC',1,0,1),(19,'COCA',1,0,1),(19,'CRM',1,0,1),(19,'POZC',1,0,1),(21,'CF',1,0,1),(22,'CF',1,0,1),(22,'COCA',1,0,1);
 /*!40000 ALTER TABLE `detalles_pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +59,7 @@ CREATE TABLE `pedidos` (
   `Mesa` int NOT NULL,
   `Total` float NOT NULL,
   PRIMARY KEY (`PK_Num_Pedido`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +68,7 @@ CREATE TABLE `pedidos` (
 
 LOCK TABLES `pedidos` WRITE;
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
-INSERT INTO `pedidos` VALUES (1,1,156),(2,2,125),(3,3,124),(4,4,126),(5,5,38);
+INSERT INTO `pedidos` VALUES (1,1,156),(2,2,125),(3,3,124),(4,4,126),(5,5,38),(6,1,250),(11,7,0),(12,2,0),(13,6,0),(14,7,38),(15,11,243),(16,7,38),(17,4,166),(18,3,37),(19,3,287),(20,1,76),(21,1,38),(22,1,59);
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,6 +123,14 @@ LOCK TABLES `tipo_platillo` WRITE;
 INSERT INTO `tipo_platillo` VALUES ('B','Bebida'),('E','Extra'),('P','Platillo'),('PO','Postres');
 /*!40000 ALTER TABLE `tipo_platillo` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'dynamics_dine'
+--
+
+--
+-- Dumping routines for database 'dynamics_dine'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -132,4 +141,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-25 21:19:53
+-- Dump completed on 2024-06-30  0:20:44
