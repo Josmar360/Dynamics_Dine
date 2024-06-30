@@ -29,7 +29,7 @@ exe = EXE(
     a.scripts,
     icon='Icon/Dynamics_Dine.png',  # Ruta al archivo .png que deseas usar como icono
     exclude_binaries=True,
-    name='Inicio',
+    name='Dynamics_Dine',
     debug=False,
     strip=False,
     upx=True,
@@ -43,5 +43,5 @@ coll = COLLECT(
     a.datas,  # Incluir los archivos y carpetas especificados en datas
     strip=False,
     upx=True,
-    name='dist/Inicio',
+    name='dist/Dynamics_Dine',
 )

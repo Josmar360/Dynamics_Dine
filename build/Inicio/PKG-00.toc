@@ -1,4 +1,4 @@
-('C:\\Users\\josma\\OneDrive\\Documentos\\Proyectos\\Dynamics_Dine\\build\\Inicio\\Inicio.pkg',
+('C:\\Users\\josma\\OneDrive\\Documentos\\Proyectos\\Dynamics_Dine\\build\\Inicio\\Dynamics_Dine.pkg',
  {'BINARY': True,
   'DATA': True,
   'EXECUTABLE': True,

@@ -1,5 +1,5 @@
-([('Inicio.exe',
-   'C:\\Users\\josma\\OneDrive\\Documentos\\Proyectos\\Dynamics_Dine\\build\\Inicio\\Inicio.exe',
+([('Dynamics_Dine.exe',
+   'C:\\Users\\josma\\OneDrive\\Documentos\\Proyectos\\Dynamics_Dine\\build\\Inicio\\Dynamics_Dine.exe',
    'EXECUTABLE'),
   ('python312.dll',
    'C:\\Users\\josma\\AppData\\Local\\Programs\\Python\\Python312\\python312.dll',
