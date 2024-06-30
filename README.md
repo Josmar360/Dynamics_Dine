@@ -87,18 +87,18 @@ El presente repositorio representa un proyecto integral del diseño y desarrollo
 Guía de Instalación
 ¡Bienvenido al repositorio del proyecto de gestión de pedidos "La Casa De Toño"! A continuación, encontrarás una guía paso a paso para descargar, configurar la base de datos y comenzar a trabajar con este proyecto en Python.
 
-1. Descargar el Repositorio:
+1. **Descargar el Repositorio:**
 
    - Ve al repositorio en GitHub: [Repositorio de la base de datos de "La Casa De Toño"](https://github.com/Josmar360/Dynamics_Dine/tree/Base_De_Datos)
    - Haz clic en el botón verde "Code" y selecciona "Download ZIP".
    - Descomprime el archivo ZIP en la ubicación de tu elección.
 
-2. Configurar la Base de Datos:
+2. **Configurar la Base de Datos:**
 
    - Ve al repositorio en GitHub: [Repositorio de la base de datos de "La Casa De Toño"](https://github.com/Josmar360/Dynamics_Dine/tree/Base_De_Datos)
    - Sigue los pasos de configuración para la base de datos.
 
-3. Importación de Datos del Respaldo:
+3. **Importación de Datos del Respaldo:**
 
    - Abre MySQL Workbench y conéctate a tu servidor de base de datos.
    - Crea una nueva base de datos o selecciona la base de datos existente para "La Casa De Toño".
