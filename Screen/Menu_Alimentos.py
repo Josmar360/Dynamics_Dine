@@ -10,15 +10,15 @@ import mysql.connector
 
 # Configuración de la base de datos
 configuracion = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'Sarinha_3',
-    'database': 'Dynamics_Dine'
+    'host': 'localhost', # Configurar con la IP de tu host
+    'user': 'root', # Configurar tu usuario que esta en red
+    'password': 'Sarinha_3', # Colocar la contraseña de tu usuario
+    'database': 'Dynamics_Dine' # No modificar este parametro
 }
 
 # Variable global para almacenar los productos seleccionados y sus cantidades
 selected_products = {}
-custom_selected = {}  # Nueva variable para personalización
+custom_selected = {}  # Nueva variable para personalización de productos seleccionados
 
 
 class ProductCard(GridLayout):
@@ -64,7 +64,7 @@ class ProductCard(GridLayout):
         self.quantity += 1
         self.quantity_label.text = str(self.quantity)
 
-        # Actualizar selected_products
+        # Actualizar selected_products productos mostrados en la pantalla
         selected_products[self.product_name] = {
             'name': self.product_name,
             'image': self.product_image,
@@ -72,7 +72,7 @@ class ProductCard(GridLayout):
             'quantity': self.quantity
         }
 
-        # Personalizar custom_selected
+        # Personalizar custom_selected copia de atributos seleccionados distintos
         custom_selected[self.fk_platillo] = self.quantity
 
     def decrement_quantity(self, instance):
@@ -80,13 +80,13 @@ class ProductCard(GridLayout):
             self.quantity -= 1
             self.quantity_label.text = str(self.quantity)
 
-            # Actualizar selected_products
+            # Actualizar selected_products para reducir cantidad
             if self.quantity == 0:
                 del selected_products[self.product_name]
             else:
                 selected_products[self.product_name]['quantity'] = self.quantity
 
-            # Personalizar custom_selected
+            # Personalizar custom_selected al reducir la cantidad
             if self.quantity == 0 and self.fk_platillo in custom_selected:
                 del custom_selected[self.fk_platillo]
             elif self.fk_platillo in custom_selected:
@@ -101,7 +101,7 @@ class Menu_Alimentos(Screen):
         conn = mysql.connector.connect(**configuracion)
         cursor = conn.cursor(dictionary=True)
 
-        # Consulta para obtener los datos
+        # Consulta para obtener los datos en pantalla
         cursor.execute("""
             SELECT P.FK_Platillo, P.Platillos, P.Precios, TP.Tipo_Platillo
             FROM Platillos P
@@ -111,7 +111,7 @@ class Menu_Alimentos(Screen):
         results = cursor.fetchall()
         conn.close()
 
-        # Organizar los datos en categorías
+        # Organizar los datos en categorías de tipo de productos
         categories = {
             'Platillo': [],
             'Bebida': [],
@@ -119,6 +119,7 @@ class Menu_Alimentos(Screen):
             'Postres': []
         }
 
+        # Impresión de tarjeta de productos con sus atributos
         for row in results:
             product = {
                 'name': row['Platillos'],
@@ -130,6 +131,7 @@ class Menu_Alimentos(Screen):
 
         tab_panel = TabbedPanel(size_hint=(1, 1))
 
+        # Separación de productos segun su categoria asignada en la base de datos
         for category, products in categories.items():
             tab = TabbedPanelItem(text=category)
             scrollview = ScrollView(size_hint=(
@@ -147,16 +149,17 @@ class Menu_Alimentos(Screen):
 
         # Agregar los botones de Salir y Pagar
         button_layout = GridLayout(cols=2, size_hint=(1, None), height=50)
-        pagar_button = Button(text='Pagar', size_hint=(0.5, 1))
-        pagar_button.bind(on_press=self.go_to_pagar)
         salir_button = Button(text='Salir', size_hint=(0.5, 1))
         salir_button.bind(on_press=self.go_to_bienvenida)
+        pagar_button = Button(text='Pagar', size_hint=(0.5, 1))
+        pagar_button.bind(on_press=self.go_to_pagar)
 
         button_layout.add_widget(salir_button)
         button_layout.add_widget(pagar_button)
 
         self.add_widget(button_layout)
 
+    # Funcion para ir a la pantalla de carrito de compras
     def go_to_pagar(self, instance):
         # print("Productos seleccionados:")
         # for product in selected_products.values():
@@ -171,5 +174,6 @@ class Menu_Alimentos(Screen):
 
         self.manager.current = 'carrito'
 
+    # Función para regresar a la pantalla de bienvenida
     def go_to_bienvenida(self, instance):
         self.manager.current = 'bienvenida'
