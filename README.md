@@ -1,6 +1,6 @@
 # Presentación
 
-Este proyecto es un sistema de gestión de pedidos para un restaurante conocida como "Casa Toño", desarrollado utilizando Python, Pygame y MySQL. La aplicación permite a los usuarios iniciar sesión y acceder a una pantalla donde se muestran los pedidos activos en la cocina.
+Este proyecto es un sistema de gestión de pedidos para un restaurante conocida como "La Casa De Toño", desarrollado utilizando Python, Pygame y MySQL. La aplicación permite a los usuarios iniciar sesión y acceder a una pantalla donde se muestran los pedidos activos en la cocina.
 
 <h1 align="center"> Diseño de aplicación de escritorio para una cocina </h1>
 <p align="center">Pantalla de pedidos activos </p>
@@ -51,15 +51,15 @@ El presente repositorio representa un proyecto integral de diseño y desarrollo 
 
 1. **Pantalla de inicio de sesión:**
 
-- Ingresar el nombre de usuario y la contraseña.
-- Presionar `Enter` para cambiar entre los campos de entrada.
-- Presionar el botón `Iniciar sesión` para intentar iniciar sesión.
-- Presionar el botón `Salir` para cerrar la aplicación.
+   - Ingresar el nombre de usuario y la contraseña.
+   - Presionar `Enter` para cambiar entre los campos de entrada.
+   - Presionar el botón `Iniciar sesión` para intentar iniciar sesión.
+   - Presionar el botón `Salir` para cerrar la aplicación.
 
 2. **Pantalla de pedidos activos:**
 
-- Una vez que el usuario ha iniciado sesión, se mostrará una pantalla con la lista de pedidos activos en la cocina.
-- Los pedidos se muestran en tiempo real, permitiendo al personal de cocina ver los pedidos pendientes y su estado.
+   - Una vez que el usuario ha iniciado sesión, se mostrará una pantalla con la lista de pedidos activos en la cocina.
+   - Los pedidos se muestran en tiempo real, permitiendo al personal de cocina ver los pedidos pendientes y su estado.
 
 # Herramientas utilizadas
 
@@ -121,6 +121,6 @@ El presente repositorio representa un proyecto integral de diseño y desarrollo 
 
 ---
 
-Este proyecto tiene como objetivo la automatización de pedidos para el restaurante conocido como "Casa Toño". A través de este proyecto, buscamos aplicar nuestras destrezas en el diseño y desarrollo de bases de datos y en la creación de una aplicación práctica utilizando Python y Pygame. Nuestra meta es no solo adquirir experiencia en la creación y gestión de bases de datos, sino también demostrar la utilidad y aplicabilidad de nuestros conocimientos en un escenario empresarial real. Con este proyecto, esperamos proporcionar una solución eficiente y funcional que mejore el proceso de pedidos en "Casa Toño".
+Este proyecto tiene como objetivo la automatización de pedidos para el restaurante conocido como "La Casa De Toño". A través de este proyecto, buscamos aplicar nuestras destrezas en el diseño y desarrollo de bases de datos y en la creación de una aplicación práctica utilizando Python y Pygame. Nuestra meta es no solo adquirir experiencia en la creación y gestión de bases de datos, sino también demostrar la utilidad y aplicabilidad de nuestros conocimientos en un escenario empresarial real. Con este proyecto, esperamos proporcionar una solución eficiente y funcional que mejore el proceso de pedidos en "Casa Toño".
 
 - [Regresar al inicio](#presentación)
