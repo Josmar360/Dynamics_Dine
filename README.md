@@ -62,14 +62,14 @@ El presente repositorio representa un proyecto integral del diseño y desarrollo
 
 1. **Creación estructural de la base de datos:**
 
-- Relación de tipo de platillos
-- Relación de platillos
-- Relación de pedidos
-- Relación de detalles de pedido realizado
+   - Relación de tipo de platillos
+   - Relación de platillos
+   - Relación de pedidos
+   - Relación de detalles de pedido realizado
 
 2. **Inserción de datos:**
 
-- Se insertaron datos que maneja "La Casa De Toño" como los platillos que ellos tienen en us restaurante. Se pueden ingresar más y las aplicaciónes seguirian operando.
+   - Se insertaron datos que maneja "La Casa De Toño" como los platillos que ellos tienen en us restaurante. Se pueden ingresar más y las aplicaciónes seguirian operando.
 
 # Herramientas utilizadas
 
