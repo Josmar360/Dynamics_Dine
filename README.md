@@ -87,23 +87,64 @@ Las capturas de pantalla a continuación destacan puntos clave sobre el sistema 
 
 ![Pantalla Del Pedido Recogido](Image/REAME/12_Pedido_Recogido.png)
 
-# Descripción del proyecto
+Claro, aquí tienes la redacción adaptada para tu proyecto "Dynamics Dine":
 
 ---
 
-El presente repositorio representa un proyecto integral de diseño y desarrollo de un sistema de gestión de pedidos para los cocineros de un restaurante con el nombre "Casa Toño", a continuación se muestran algunos puntos clave:
+# Descripción del proyecto
 
-1. **Pantalla de inicio de sesión:**
+El presente repositorio representa un proyecto integral de diseño y desarrollo de un sistema de gestión de pedidos para los cocineros de un restaurante con el nombre "La Casa De Toño". A continuación, se muestran algunos puntos clave sobre el flujo de la aplicación y su funcionamiento:
 
-- Ingresar el nombre de usuario y la contraseña.
-- Presionar `Enter` para cambiar entre los campos de entrada.
-- Presionar el botón `Iniciar sesión` para intentar iniciar sesión.
-- Presionar el botón `Salir` para cerrar la aplicación.
+1. **Pantalla de Selección de Mesa:**
 
-2. **Pantalla de pedidos activos:**
+   - Al iniciar la aplicación, se pedirá al usuario que seleccione un número de mesa.
+   - Una vez seleccionada la mesa, el usuario será dirigido a la pantalla de bienvenida.
 
-- Una vez que el usuario ha iniciado sesión, se mostrará una pantalla con la lista de pedidos activos en la cocina.
-- Los pedidos se muestran en tiempo real, permitiendo al personal de cocina ver los pedidos pendientes y su estado.
+2. **Pantalla de Bienvenida:**
+
+   - En la pantalla de bienvenida, el usuario puede hacer clic o doble clic para ir al menú de alimentos.
+
+3. **Menú de Alimentos:**
+
+   - El menú de alimentos está organizado en las siguientes categorías: Alimentos, Bebidas, Extras y Postres.
+   - Cada categoría muestra tarjetas de los productos con su imagen, nombre, precio, y botones para agregar o quitar productos.
+   - En la parte inferior de la pantalla hay dos botones:
+     - **Regresar**: Permite volver a la pantalla de bienvenida.
+     - **Pagar**: Permite avanzar a la pantalla del carrito de compras.
+
+4. **Carrito de Compras:**
+
+   - Esta pantalla muestra los productos seleccionados con sus imágenes, nombres, precios y cantidades.
+   - También se muestra el total de la compra.
+   - Botones disponibles:
+     - **Menú Alimentos**: Permite regresar al menú de alimentos.
+     - **Pagar**: Permite avanzar a la pantalla de forma de pago.
+
+5. **Forma de Pago:**
+
+   - En esta pantalla, se solicita al usuario que ingrese los detalles de su tarjeta: número de tarjeta (16 dígitos), CVV (3 dígitos), y fecha de vencimiento (2 dígitos para mes y 2 dígitos para año).
+   - Botones disponibles:
+     - **Regresar**: Permite volver al carrito de compras.
+     - **Pagar**: Inicialmente inhabilitado hasta que se ingresen todos los datos de la tarjeta de manera correcta. Una vez habilitado, permite avanzar a la pantalla de confirmación del pedido.
+
+6. **Realizar Pedido:**
+
+   - En esta pantalla, se muestra el pedido y el total pagado.
+   - Botón disponible:
+     - **Aceptar**: Al hacer clic, se avanza a la pantalla de estatus del pedido.
+
+7. **Estatus del Pedido:**
+
+   - Se muestran todos los productos comprados con su imagen, nombre y estatus.
+   - Estatus disponibles:
+     - **En preparación** (color rojo)
+     - **Listo para recoger** (color verde)
+   - Botones disponibles:
+     - **Menú Alimentos**: Permite regresar al menú de alimentos.
+     - **Actualizar**: Permite actualizar la pantalla para ver si ha cambiado el estatus de algún producto.
+     - **Recoger**: Permite recoger los productos que ya están listos. Los productos listos desaparecerán de la pantalla, mientras que los que están en preparación se mantendrán.
+
+Esta guía proporciona una visión general del flujo de la aplicación y cómo interactuar con cada pantalla para gestionar los pedidos en "La Casa De Toño".
 
 # Herramientas utilizadas
 
@@ -113,6 +154,8 @@ El presente repositorio representa un proyecto integral de diseño y desarrollo 
 - [MySQL Connector 8.4.0](https://dev.mysql.com/downloads/connector/python/)
 - [Python 3.12.4](https://www.python.org/downloads/)
 - [PyGame 2.6.0](https://www.pygame.org/news)
+- [Pyllow 10.3.0](https://pypi.org/project/pillow/)
+- [Kivy 2.3.0](https://kivy.org/doc/stable/gettingstarted/installation.html)
 - [DateTime 5.5](https://pypi.org/project/DateTime/)
 - [ColorCode](https://htmlcolorcodes.com/es/)
 - [Shields.io](https://shields.io/badges/static-badge)
