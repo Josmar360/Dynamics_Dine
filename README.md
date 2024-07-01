@@ -87,11 +87,9 @@ Las capturas de pantalla a continuación destacan puntos clave sobre el sistema 
 
 ![Pantalla Del Pedido Recogido](Image/REAME/12_Pedido_Recogido.png)
 
-Claro, aquí tienes la redacción adaptada para tu proyecto "Dynamics Dine":
+# Descripción del proyecto
 
 ---
-
-# Descripción del proyecto
 
 El presente repositorio representa un proyecto integral de diseño y desarrollo de un sistema de gestión de pedidos para los cocineros de un restaurante con el nombre "La Casa De Toño". A continuación, se muestran algunos puntos clave sobre el flujo de la aplicación y su funcionamiento:
 
@@ -160,11 +158,9 @@ Esta guía proporciona una visión general del flujo de la aplicación y cómo i
 - [ColorCode](https://htmlcolorcodes.com/es/)
 - [Shields.io](https://shields.io/badges/static-badge)
 
-Aquí tienes la guía de instalación adaptada para tu proyecto:
+# Guía de Instalación
 
 ---
-
-# Guía de Instalación
 
 ¡Bienvenido al repositorio del proyecto de gestión de pedidos "Dynamics Dine"! A continuación, encontrarás una guía paso a paso para descargar, configurar la base de datos y comenzar a trabajar con este proyecto en Python.
 
