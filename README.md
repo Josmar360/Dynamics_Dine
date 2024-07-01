@@ -182,8 +182,6 @@ Esta guía proporciona una visión general del flujo de la aplicación y cómo i
 
      ```sh
      pip install kivy
-     pip install pillow
-     pip install mysql-connector-python
      ```
 
      ```sh
