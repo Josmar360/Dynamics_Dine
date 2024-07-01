@@ -117,42 +117,54 @@ El presente repositorio representa un proyecto integral de diseño y desarrollo 
 - [ColorCode](https://htmlcolorcodes.com/es/)
 - [Shields.io](https://shields.io/badges/static-badge)
 
-# Guía de instalación
+Aquí tienes la guía de instalación adaptada para tu proyecto:
 
 ---
+
+# Guía de Instalación
 
 ¡Bienvenido al repositorio del proyecto de gestión de pedidos "Dynamics Dine"! A continuación, encontrarás una guía paso a paso para descargar, configurar la base de datos y comenzar a trabajar con este proyecto en Python.
 
 1. **Descargar el Repositorio:**
 
-   - Ve al repositorio en GitHub: [Aplicación de escritorio](https://github.com/Josmar360/Dynamics_Dine/tree/Aplicacion_Escritorio)
+   - Ve al repositorio en GitHub: [Dynamics Dine Movil](https://github.com/Josmar360/Dynamics_Dine/tree/Aplicacion_Movil)
    - Haz clic en el botón verde "Code" y selecciona "Download ZIP".
    - Descomprime el archivo ZIP en la ubicación de tu elección.
 
 2. **Configurar la Base de Datos:**
 
-   - Ve al repositorio en GitHub: [Ir a base de datos](https://github.com/Josmar360/Dynamics_Dine/tree/Base_De_Datos)
+   - Ve al repositorio en GitHub: [Base de Datos](https://github.com/Josmar360/Dynamics_Dine/tree/Base_De_Datos)
    - Sigue los pasos de configuración para la base de datos.
 
-3. **Iniciar el Proyecto en NetBeans:**
-   - Asegúrate de tener Python 3.12.4 instalado en tu máquina. Puedes descargarlo desde el sitio oficial: [Descargar Python](https://www.python.org/downloads/).
+3. **Instalar Dependencias:**
+
+   - Asegúrate de tener Python 3.12 instalado en tu máquina. Puedes descargarlo desde el sitio oficial: [Descargar Python](https://www.python.org/downloads/).
    - Instala las dependencias necesarias:
+
      ```sh
-     pip install pygame mysql-connector-python
+     pip install kivy
+     pip install pillow
+     pip install mysql-connector-python
      ```
 
-## Ejecución de la Aplicación
+     ```sh
+     pip install pillow
+     ```
 
-1. Navega al directorio del proyecto:
+     ```sh
+     pip install mysql-connector-python
+     ```
 
-   ```sh
-   cd Dynamics_Dine
-   ```
+4. **Ejecutar la Aplicación:**
 
-2. Ejecuta el archivo principal del proyecto:
-   ```sh
-   python Inicio.py
-   ```
+   - Para ejecutar la aplicación desde el código fuente, navega al directorio donde descomprimiste el proyecto y ejecuta `Inicio.py`:
+     ```sh
+     python Inicio.py
+     ```
+   - Alternativamente, puedes utilizar el ejecutable disponible. Ve a la carpeta `dist` y luego a la subcarpeta `Dynamics_Dine`. Allí encontrarás el ejecutable `Dynamics_Dine_Movil.exe`:
+     ```sh
+     ./dist/Dynamics_Dine/Dynamics_Dine_Movil.exe
+     ```
 
 # Autor/es
 
@@ -165,6 +177,6 @@ El presente repositorio representa un proyecto integral de diseño y desarrollo 
 
 ---
 
-Este proyecto tiene como objetivo la automatización de pedidos para el restaurante conocido como "Casa Toño". A través de este proyecto, buscamos aplicar nuestras destrezas en el diseño y desarrollo de bases de datos y en la creación de una aplicación práctica utilizando Python y Pygame. Nuestra meta es no solo adquirir experiencia en la creación y gestión de bases de datos, sino también demostrar la utilidad y aplicabilidad de nuestros conocimientos en un escenario empresarial real. Con este proyecto, esperamos proporcionar una solución eficiente y funcional que mejore el proceso de pedidos en "Casa Toño".
+Este proyecto tiene como objetivo la automatización de pedidos para el restaurante conocido como "La Casa De Toño". A través de este proyecto, buscamos aplicar nuestras destrezas en el diseño y desarrollo de bases de datos y en la creación de una aplicación práctica utilizando Python y Pygame para el desarrollo de una interfaz de escritorio, y para una interfaz tactil usaremos Kivy y Pillow. Nuestra meta es no solo adquirir experiencia en la creación y gestión de bases de datos, sino también demostrar la utilidad y aplicabilidad de nuestros conocimientos en un escenario empresarial real. Con este proyecto, esperamos proporcionar una solución eficiente y funcional que mejore el proceso de pedidos en "Casa Toño".
 
 - [Regresar al inicio](#presentación)
